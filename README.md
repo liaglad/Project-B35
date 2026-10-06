@@ -1,1 +1,12 @@
-# Project-B35
+# Project-B35 🧬🔬🧫 
+This model uses a cell’s optical deformability to estimate the probability that it is healthy, cancerous or metastatic. The model takes parameters mean (μ) and standard error from the given paper Optical Deformability as an Inherent Cell Marker for Testing Malignant Transformation and Metastatic Competence and generates data using Monte Carlo. Then a probabilistic classifier was built to estimate the probability that a generated test cell is healthy, cancerous or metastatic. The percentage of healthy, cancerous and metastatic cells was plotted against optical deformability, assuming a normal distribution since the data is continuous. 
+# How it runs 👩‍💻
+OBS! No data files are needed to run the python notebook for this project. No experimental data was given in the paper except the mean and the standard error which are incorporated in the existing code. It is therefore all clear to just run the code 😋
+## *Calculating standard deviation from standard error*
+Standard error was given in the paper and then converted into standard deviation to be able to generate data according to a normal distribution. 
+## *Monte Carlo generator for random cells* 
+To generate the data, we use a linear congruential generator (LCG) and a uniforms function to convert the pseudo random integers into numbers between [0,1). Box Müller was then used to transform the simulated uniform data into normally distributed data based on the given mean and standard deviation value. 
+## *Building a probabilistic classifier*
+A function is defined to calculate the normal probability distribution using the given parameters, μ and σ, and a random variable x, representing optical deformability. The probability of a cell being healthy, cancerous, or metastatic is calculated based on its optical deformability. To test the model, a random optical deformability value between 0 and 60 is generated using NumPy. The corresponding probabilities for the three cell types are then calculated and compared to determine which cell types are most likely with a top prediction and a second prediction. 
+## *Backwards simulation using mean and validating using bootstrap*
+A backward simulation was performed by estimating the mean and standard deviation from the simulated data. However, this approach is highly limited, as the paper did not provide any experimental data. Therefore, the backward simulation had to be based on the simulated data rather than experimental measurements, making it difficult to assess how accurately the estimated parameters are. 
